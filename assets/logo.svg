@@ -23,7 +23,7 @@
   <!-- Top label -->
   <text
     x="200"
-    y="148"
+    y="123"
     font-family="'Courier New', Courier, monospace"
     font-size="11"
     font-weight="400"
@@ -32,12 +32,12 @@
     letter-spacing="6">THE</text>
 
   <!-- Orange accent line above wordmark -->
-  <rect x="160" y="160" width="80" height="2" fill="#ff6600" rx="1" opacity="0.7"/>
+  <rect x="160" y="135" width="80" height="2" fill="#ff6600" rx="1" opacity="0.7"/>
 
   <!-- CADENCE — orange -->
   <text
     x="200"
-    y="222"
+    y="197"
     font-family="Georgia, 'Times New Roman', serif"
     font-size="52"
     font-weight="700"
@@ -48,7 +48,7 @@
   <!-- FRAMEWORK — white -->
   <text
     x="200"
-    y="268"
+    y="243"
     font-family="Georgia, 'Times New Roman', serif"
     font-size="36"
     font-weight="400"
@@ -57,12 +57,12 @@
     letter-spacing="2">FRAMEWORK</text>
 
   <!-- Orange accent line below wordmark -->
-  <rect x="160" y="284" width="80" height="2" fill="#ff6600" rx="1" opacity="0.4"/>
+  <rect x="160" y="259" width="80" height="2" fill="#ff6600" rx="1" opacity="0.4"/>
 
   <!-- Bottom tagline -->
   <text
     x="200"
-    y="320"
+    y="295"
     font-family="'Courier New', Courier, monospace"
     font-size="9"
     text-anchor="middle"
