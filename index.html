@@ -71,9 +71,9 @@
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 72px 72px;
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
       pointer-events: none;
       z-index: 0;
     }
@@ -81,12 +81,25 @@
     /* ── Orange ambient glow ── */
     .glow-top {
       position: fixed;
-      top: -300px; left: 50%;
+      top: -200px; left: 50%;
       transform: translateX(-50%);
-      width: 900px; height: 600px;
-      background: radial-gradient(ellipse, rgba(255,102,0,0.06) 0%, transparent 60%);
+      width: 1100px; height: 700px;
+      background: radial-gradient(ellipse, rgba(255,102,0,0.08) 0%, transparent 65%);
       pointer-events: none;
       z-index: 0;
+    }
+
+    /* ── Scroll progress bar ── */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 100%;
+      background: var(--orange);
+      transform-origin: left;
+      transform: scaleX(0);
+      z-index: 500;
+      transition: transform 0.08s linear;
     }
 
     /* ── Layout ── */
@@ -244,8 +257,8 @@
     /* ── SCROLL REVEAL ── */
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
     }
 
     .reveal.visible {
@@ -260,8 +273,38 @@
 
     /* ── HERO ── */
     #hero {
-      padding: 180px 0 120px;
+      padding: 180px 0 130px;
       text-align: center;
+      overflow: hidden;
+    }
+
+    /* Animated waveform behind hero */
+    .hero-waveform {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 160px;
+      width: 900px;
+      opacity: 0.055;
+      pointer-events: none;
+      justify-content: center;
+    }
+
+    .hero-waveform .bar {
+      flex-shrink: 0;
+      width: 3px;
+      background: var(--orange);
+      border-radius: 2px 2px 0 0;
+      animation: waveBar var(--dur, 1.4s) ease-in-out infinite alternate;
+      animation-delay: var(--delay, 0s);
+    }
+
+    @keyframes waveBar {
+      from { height: 15%; }
+      to   { height: 100%; }
     }
 
     .hero-badge {
@@ -305,6 +348,7 @@
     .hero-h1 .word-accent {
       color: var(--orange);
       display: inline-block;
+      text-shadow: 0 0 80px rgba(255,102,0,0.35);
     }
 
     .hero-h1 .word-muted {
@@ -350,7 +394,8 @@
 
     .btn-primary:hover {
       background: var(--orange-light);
-      box-shadow: 0 4px 24px rgba(255,102,0,0.25);
+      box-shadow: 0 4px 28px rgba(255,102,0,0.3);
+      transform: translateY(-1px);
     }
 
     .btn-primary:active { transform: scale(0.97); }
@@ -376,6 +421,54 @@
       border-color: var(--border-bright);
       color: var(--text);
       background: rgba(255,255,255,0.03);
+    }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-card);
+      padding: 0.9rem 0;
+      cursor: default;
+      user-select: none;
+    }
+
+    .ticker {
+      display: flex;
+      gap: 0;
+      animation: ticker 28s linear infinite;
+      width: max-content;
+    }
+
+    .ticker:hover { animation-play-state: paused; }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      padding: 0 2rem;
+    }
+
+    .ticker-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--orange);
+      opacity: 0.7;
+      flex-shrink: 0;
     }
 
     /* ── SECTION SHARED ── */
@@ -417,12 +510,6 @@
       font-weight: 400;
     }
 
-    .section-divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
     /* ── ABOUT ── */
     #about {
       padding: var(--section-gap) 0;
@@ -459,7 +546,23 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       margin: -1px 0 0 -1px;
+      transition: background 0.2s ease;
+      position: relative;
+      overflow: hidden;
     }
+
+    .stat::after {
+      content: "";
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .stat:hover { background: var(--bg-card-hover); }
+    .stat:hover::after { opacity: 0.4; }
 
     .stat-num {
       font-size: 2.8rem;
@@ -506,12 +609,44 @@
       background: var(--bg-card);
       border-right: 1px solid var(--border);
       position: relative;
-      transition: background 0.2s ease;
+      overflow: hidden;
+      transition: background 0.25s ease;
       cursor: default;
     }
 
     .phase:last-child { border-right: none; }
-    .phase:hover { background: var(--bg-card-hover); }
+
+    /* Large decorative background number */
+    .phase::before {
+      content: attr(data-num);
+      position: absolute;
+      right: -0.05em;
+      bottom: -0.2em;
+      font-size: 7rem;
+      font-weight: 900;
+      color: var(--orange);
+      opacity: 0.04;
+      line-height: 1;
+      pointer-events: none;
+      letter-spacing: -0.05em;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    /* Animated top bar on hover */
+    .phase::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .phase:hover { background: #141414; }
+    .phase:hover::before { opacity: 0.07; transform: scale(1.05); }
+    .phase:hover::after { transform: scaleX(1); }
 
     .phase-n {
       font-family: var(--mono);
@@ -543,7 +678,6 @@
       font-size: 0.72rem;
       color: var(--orange);
       letter-spacing: 0.08em;
-      opacity: 1;
       margin-bottom: 1.25rem;
     }
 
@@ -578,41 +712,62 @@
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       border: 1px solid var(--border);
       border-radius: var(--r);
       overflow: hidden;
     }
 
     .service {
-      padding: 1.5rem;
+      padding: 1.5rem 1.5rem;
       background: var(--bg-card);
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
-      transition: background 0.2s ease;
+      align-items: center;
+      gap: 1rem;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
     }
 
-    .service:hover { background: var(--bg-card-hover); }
-
-    .service-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
+    .service::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
       background: var(--orange);
-      opacity: 0.6;
+      transform: scaleY(0);
+      transition: transform 0.25s ease;
     }
 
-    .service:hover .service-dot { opacity: 1; }
+    .service:hover {
+      background: #131313;
+      box-shadow: inset 0 0 40px rgba(255,102,0,0.04);
+    }
+
+    .service:hover::before { transform: scaleY(1); }
+
+    .service-icon {
+      width: 20px; height: 20px;
+      flex-shrink: 0;
+      color: var(--orange);
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+    }
+
+    .service:hover .service-icon { opacity: 1; }
 
     .service-name {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      color: var(--text);
+      color: var(--text-secondary);
       letter-spacing: -0.01em;
       line-height: 1.4;
+      transition: color 0.2s ease;
     }
+
+    .service:hover .service-name { color: var(--text); }
 
     /* ── CASE STUDIES ── */
     #work {
@@ -636,9 +791,23 @@
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       transition: background 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .work-cat::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
     }
 
     .work-cat:hover { background: var(--bg-card-hover); }
+    .work-cat:hover::after { transform: scaleX(1); }
 
     .work-cat:nth-child(3n) { border-right: none; }
 
@@ -667,7 +836,7 @@
       display: flex;
       align-items: center;
       gap: 0.65rem;
-      transition: color 0.15s;
+      transition: color 0.15s, transform 0.15s;
     }
 
     .client-list li::before {
@@ -677,6 +846,7 @@
       background: var(--orange);
       opacity: 0.5;
       flex-shrink: 0;
+      transition: opacity 0.15s;
     }
 
     .work-cat:hover .client-list li { color: var(--text); }
@@ -701,10 +871,10 @@
     .cta-box::before {
       content: "";
       position: absolute;
-      top: -150px; left: 50%;
+      top: -200px; left: 50%;
       transform: translateX(-50%);
-      width: 600px; height: 400px;
-      background: radial-gradient(ellipse, rgba(255,102,0,0.07) 0%, transparent 65%);
+      width: 800px; height: 500px;
+      background: radial-gradient(ellipse, rgba(255,102,0,0.08) 0%, transparent 65%);
       pointer-events: none;
     }
 
@@ -714,7 +884,23 @@
       bottom: 0; left: 0; right: 0;
       height: 2px;
       background: linear-gradient(90deg, transparent, var(--orange), transparent);
-      opacity: 0.4;
+      opacity: 0.5;
+    }
+
+    /* Big decorative text behind CTA */
+    .cta-bg-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: clamp(5rem, 18vw, 12rem);
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      color: var(--orange);
+      opacity: 0.03;
+      white-space: nowrap;
+      pointer-events: none;
+      line-height: 1;
+      user-select: none;
     }
 
     .cta-label { justify-content: center; margin-bottom: 1.5rem; }
@@ -808,7 +994,7 @@
 
     .footer-copy {
       font-family: var(--mono);
-      font-size: 0.65rem;
+      font-size: 0.72rem;
       letter-spacing: 0.06em;
       color: var(--muted);
       width: 100%;
@@ -841,6 +1027,8 @@
 
       #hero { padding: 140px 0 80px; }
       .hero-h1 { letter-spacing: -0.04em; }
+      .hero-waveform { width: 100%; height: 100px; gap: 3px; }
+      .hero-waveform .bar { width: 2px; }
 
       .phases-grid { grid-template-columns: 1fr; }
       .phase { border-right: none; border-bottom: 1px solid var(--border); }
@@ -855,6 +1043,7 @@
       .work-cat:last-child { border-bottom: none; }
 
       .cta-box { padding: 3rem 1.5rem; }
+      .cta-bg-text { font-size: 4rem; }
 
       .stats-panel { grid-template-columns: 1fr 1fr; }
 
@@ -866,12 +1055,17 @@
 
     @media (prefers-reduced-motion: reduce) {
       .hero-badge-dot { animation: none; }
+      .hero-waveform .bar { animation: none; height: 40%; }
+      .ticker { animation: none; }
       .reveal { opacity: 1; transform: none; transition: none; }
       * { transition-duration: 0.01ms !important; }
     }
   </style>
 </head>
 <body>
+
+<!-- Scroll progress -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <div class="glow-top" aria-hidden="true"></div>
 
@@ -906,6 +1100,9 @@
 
 <!-- ── HERO ── -->
 <section id="hero" aria-label="Hero">
+  <!-- Waveform animation behind text -->
+  <div class="hero-waveform" aria-hidden="true" id="heroWave"></div>
+
   <div class="wrap" style="text-align:center;">
     <div class="hero-badge reveal">
       <span class="hero-badge-dot"></span>
@@ -913,7 +1110,7 @@
     </div>
     <h1 class="hero-h1 reveal reveal-delay-1">
       Find the<br/>
-      <span class="word-accent">Rhythm</span><br/>
+      <span class="word-accent" id="scrambleWord">Rhythm</span><br/>
       <span class="word-muted">with your framework.</span>
     </h1>
     <p class="hero-sub reveal reveal-delay-2">
@@ -928,6 +1125,38 @@
     </div>
   </div>
 </section>
+
+<!-- ── TICKER ── -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker">
+    <!-- Set 1 -->
+    <span class="ticker-item">Find the Rhythm<span class="ticker-dot"></span></span>
+    <span class="ticker-item">AI Integration<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Web Development<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Brand Identity<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Content Creation<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Systems That Scale<span class="ticker-dot"></span></span>
+    <span class="ticker-item">UI / UX Design<span class="ticker-dot"></span></span>
+    <span class="ticker-item">App Development<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Build the System<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Digital Marketing<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Automation<span class="ticker-dot"></span></span>
+    <span class="ticker-item">The Cadence Framework<span class="ticker-dot"></span></span>
+    <!-- Set 2 (duplicate for seamless loop) -->
+    <span class="ticker-item">Find the Rhythm<span class="ticker-dot"></span></span>
+    <span class="ticker-item">AI Integration<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Web Development<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Brand Identity<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Content Creation<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Systems That Scale<span class="ticker-dot"></span></span>
+    <span class="ticker-item">UI / UX Design<span class="ticker-dot"></span></span>
+    <span class="ticker-item">App Development<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Build the System<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Digital Marketing<span class="ticker-dot"></span></span>
+    <span class="ticker-item">Automation<span class="ticker-dot"></span></span>
+    <span class="ticker-item">The Cadence Framework<span class="ticker-dot"></span></span>
+  </div>
+</div>
 
 <!-- ── ABOUT ── -->
 <section id="about" aria-label="About">
@@ -948,19 +1177,19 @@
       </div>
       <div class="stats-panel reveal reveal-delay-2">
         <div class="stat">
-          <div class="stat-num">11</div>
+          <div class="stat-num" data-target="11" data-suffix="">11</div>
           <div class="stat-desc">Services<br/>offered</div>
         </div>
         <div class="stat">
-          <div class="stat-num">4</div>
+          <div class="stat-num" data-target="4" data-suffix="">4</div>
           <div class="stat-desc">Phase<br/>process</div>
         </div>
         <div class="stat">
-          <div class="stat-num">10+</div>
+          <div class="stat-num" data-target="10" data-suffix="+">10+</div>
           <div class="stat-desc">Clients<br/>served</div>
         </div>
         <div class="stat">
-          <div class="stat-num">∞</div>
+          <div class="stat-num">&infin;</div>
           <div class="stat-desc">Industries<br/>welcome</div>
         </div>
       </div>
@@ -981,25 +1210,25 @@
       </p>
     </div>
     <div class="phases-grid reveal reveal-delay-1">
-      <div class="phase">
+      <div class="phase" data-num="01">
         <div class="phase-n">01</div>
         <div class="phase-name">The Audit</div>
         <div class="phase-tag">Pulse Check</div>
         <p class="phase-body">We set up a call and map your current workflow — finding exactly where you're stuck in maintenance mode and what's slowing you down.</p>
       </div>
-      <div class="phase">
+      <div class="phase" data-num="02">
         <div class="phase-n">02</div>
         <div class="phase-name">The Blueprint</div>
         <div class="phase-tag">The Score</div>
         <p class="phase-body">We design your step-by-step process. A workflow map showing how your AI, web, and content systems connect — and what needs to change.</p>
       </div>
-      <div class="phase">
+      <div class="phase" data-num="03">
         <div class="phase-n">03</div>
         <div class="phase-name">The Integration</div>
         <div class="phase-tag">The Downbeat</div>
         <p class="phase-body">We build. Implementing the UI/UX, AI automations, and brand identity your company needs — based on your audit, not a preset package.</p>
       </div>
-      <div class="phase">
+      <div class="phase" data-num="04">
         <div class="phase-n">04</div>
         <div class="phase-name">The Momentum</div>
         <div class="phase-tag">The Resonance</div>
@@ -1023,47 +1252,47 @@
     </div>
     <div class="services-grid reveal reveal-delay-1">
       <div class="service">
-        <div class="service-dot"></div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
         <div class="service-name">Content Creation</div>
       </div>
       <div class="service">
-        <div class="service-dot"></div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
         <div class="service-name">Consulting</div>
       </div>
       <div class="service">
-        <div class="service-dot"></div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
         <div class="service-name">Photography &amp; Videography</div>
       </div>
       <div class="service">
-        <div class="service-dot"></div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         <div class="service-name">Personal Branding</div>
       </div>
       <div class="service">
-        <div class="service-dot"></div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
         <div class="service-name">UI / UX Development</div>
       </div>
       <div class="service">
-        <div class="service-dot"></div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         <div class="service-name">Branding &amp; Brand Identity</div>
       </div>
       <div class="service">
-        <div class="service-dot"></div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
         <div class="service-name">Social Media</div>
       </div>
       <div class="service">
-        <div class="service-dot"></div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         <div class="service-name">Web Development</div>
       </div>
       <div class="service">
-        <div class="service-dot"></div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
         <div class="service-name">App Development</div>
       </div>
       <div class="service">
-        <div class="service-dot"></div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
         <div class="service-name">Digital Marketing</div>
       </div>
       <div class="service">
-        <div class="service-dot"></div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         <div class="service-name">AI Integration</div>
       </div>
     </div>
@@ -1126,6 +1355,7 @@
 <section id="cta" aria-label="Book a call">
   <div class="wrap">
     <div class="cta-box">
+      <div class="cta-bg-text" aria-hidden="true">CADENCE</div>
       <p class="label cta-label reveal">Get Started</p>
       <h2 class="cta-title reveal reveal-delay-1">
         Ready to find your<br/><em>rhythm?</em>
@@ -1162,6 +1392,13 @@
 </footer>
 
 <script>
+  // ── Scroll progress bar ──
+  const progress = document.getElementById('scrollProgress');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    progress.style.transform = `scaleX(${Math.min(pct, 1)})`;
+  }, { passive: true });
+
   // ── Sticky nav on scroll ──
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
@@ -1213,6 +1450,88 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // ── Hero waveform bars ──
+  (function buildWave() {
+    const wave = document.getElementById('heroWave');
+    if (!wave) return;
+    const count = 60;
+    for (let i = 0; i < count; i++) {
+      const bar = document.createElement('div');
+      bar.className = 'bar';
+      const dur = (0.8 + Math.random() * 1.4).toFixed(2) + 's';
+      const delay = (Math.random() * 1.5).toFixed(2) + 's';
+      const minH = 10 + Math.random() * 20;
+      const maxH = 40 + Math.random() * 60;
+      bar.style.cssText = `--dur:${dur};--delay:${delay};--min:${minH}%;--max:${maxH}%;animation-duration:${dur};animation-delay:${delay};`;
+      wave.appendChild(bar);
+    }
+  })();
+
+  // Override bar animation to use per-bar min/max
+  const waveStyle = document.createElement('style');
+  waveStyle.textContent = `
+    @keyframes waveBar {
+      from { height: var(--min, 10%); }
+      to   { height: var(--max, 100%); }
+    }
+  `;
+  document.head.appendChild(waveStyle);
+
+  // ── Text scramble on "Rhythm" ──
+  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  function scramble(el, finalText, duration) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const totalFrames = Math.round(duration / 50);
+    let frame = 0;
+    const id = setInterval(() => {
+      el.textContent = finalText.split('').map((ch, i) => {
+        if (i < Math.floor((frame / totalFrames) * finalText.length)) return ch;
+        return CHARS[Math.floor(Math.random() * CHARS.length)];
+      }).join('');
+      frame++;
+      if (frame > totalFrames) { el.textContent = finalText; clearInterval(id); }
+    }, 50);
+  }
+
+  // Trigger scramble when the hero h1 becomes visible
+  const scrambleEl = document.getElementById('scrambleWord');
+  let scrambleDone = false;
+  const scrambleObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !scrambleDone) {
+      scrambleDone = true;
+      setTimeout(() => scramble(scrambleEl, 'Rhythm', 900), 400);
+      scrambleObserver.disconnect();
+    }
+  }, { threshold: 0.5 });
+  if (scrambleEl) scrambleObserver.observe(scrambleEl);
+
+  // ── Count-up stats ──
+  function countUp(el, target, suffix, duration) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const step = 16;
+    const total = Math.ceil(duration / step);
+    let frame = 0;
+    const timer = setInterval(() => {
+      frame++;
+      const val = Math.round((frame / total) * target);
+      el.textContent = (val >= target ? target : val) + suffix;
+      if (frame >= total) clearInterval(timer);
+    }, step);
+  }
+
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.target, 10);
+      const suffix = el.dataset.suffix || '';
+      if (!isNaN(target)) countUp(el, target, suffix, 1000);
+      statObserver.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.stat-num[data-target]').forEach(el => statObserver.observe(el));
 </script>
 
 </body>
