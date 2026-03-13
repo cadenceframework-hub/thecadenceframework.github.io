@@ -5,54 +5,79 @@
   <!-- Grid overlay -->
   <defs>
     <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#1a1a1a" stroke-width="1"/>
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#161616" stroke-width="1"/>
     </pattern>
     <radialGradient id="glow" cx="50%" cy="0%" r="70%">
-      <stop offset="0%" stop-color="#ff6600" stop-opacity="0.10"/>
-      <stop offset="100%" stop-color="#ff6600" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glow2" cx="50%" cy="100%" r="50%">
-      <stop offset="0%" stop-color="#ff6600" stop-opacity="0.05"/>
+      <stop offset="0%" stop-color="#ff6600" stop-opacity="0.09"/>
       <stop offset="100%" stop-color="#ff6600" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
   <rect width="1200" height="630" fill="url(#grid)"/>
   <rect width="1200" height="630" fill="url(#glow)"/>
-  <rect width="1200" height="630" fill="url(#glow2)"/>
 
   <!-- Outer border -->
-  <rect x="1" y="1" width="1198" height="628" fill="none" stroke="#222" stroke-width="1"/>
+  <rect x="1" y="1" width="1198" height="628" fill="none" stroke="#1e1e1e" stroke-width="1"/>
 
   <!-- Inner frame -->
-  <rect x="48" y="48" width="1104" height="534" fill="none" stroke="#1e1e1e" stroke-width="1" rx="4"/>
+  <rect x="60" y="60" width="1080" height="510" fill="none" stroke="#1a1a1a" stroke-width="1" rx="4"/>
 
-  <!-- Left orange accent line -->
-  <rect x="48" y="48" width="3" height="534" fill="#ff6600" opacity="0.5"/>
+  <!-- Left orange accent bar -->
+  <rect x="60" y="60" width="3" height="510" fill="#ff6600" opacity="0.45"/>
 
   <!-- Badge -->
-  <rect x="100" y="110" width="220" height="28" rx="14" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
-  <circle cx="120" cy="124" r="5" fill="#ff6600"/>
-  <text x="135" y="129" font-family="'Courier New', Courier, monospace" font-size="11" fill="#5a5a5a" letter-spacing="2">NOW TAKING CLIENTS</text>
+  <rect x="110" y="118" width="238" height="28" rx="14" fill="#111" stroke="#252525" stroke-width="1"/>
+  <circle cx="132" cy="132" r="5" fill="#ff6600"/>
+  <text x="147" y="137" font-family="'Courier New', Courier, monospace" font-size="11" fill="#4a4a4a" letter-spacing="2.5">NOW TAKING CLIENTS</text>
 
-  <!-- Main headline -->
-  <text x="100" y="230" font-family="Georgia, 'Times New Roman', serif" font-size="86" font-weight="700" fill="#f0f0f0" letter-spacing="-3">Find the</text>
-  <text x="100" y="330" font-family="Georgia, 'Times New Roman', serif" font-size="86" font-weight="700" fill="#ff6600" letter-spacing="-3">Rhythm.</text>
+  <!-- THE — small muted -->
+  <text
+    x="110"
+    y="230"
+    font-family="'Courier New', Courier, monospace"
+    font-size="18"
+    fill="#3a3a3a"
+    letter-spacing="8">THE</text>
 
-  <!-- Divider -->
-  <rect x="100" y="362" width="60" height="2" fill="#ff6600" rx="1" opacity="0.6"/>
+  <!-- CADENCE — orange, large -->
+  <text
+    x="110"
+    y="340"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="130"
+    font-weight="700"
+    fill="#ff6600"
+    letter-spacing="-4">CADENCE</text>
 
-  <!-- Subtext -->
-  <text x="100" y="415" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="22" fill="#888" letter-spacing="0">Build the systems. Lead the company.</text>
+  <!-- FRAMEWORK — white, medium -->
+  <text
+    x="112"
+    y="415"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="70"
+    font-weight="400"
+    fill="#f0f0f0"
+    letter-spacing="6">FRAMEWORK</text>
 
-  <!-- Right side — wordmark -->
-  <text x="1100" y="490" font-family="'Courier New', Courier, monospace" font-size="11" fill="#333" text-anchor="end" letter-spacing="3">THECADENCEFRAMEWORK.COM</text>
+  <!-- Divider line -->
+  <rect x="110" y="448" width="80" height="2" fill="#ff6600" rx="1" opacity="0.5"/>
 
-  <!-- Right monogram -->
-  <rect x="940" y="130" width="160" height="160" rx="4" fill="#111" stroke="#222" stroke-width="1"/>
-  <text x="1020" y="240" font-family="Georgia, 'Times New Roman', serif" font-size="80" font-weight="700" fill="#f0f0f0" text-anchor="middle" letter-spacing="-2">CF</text>
-  <rect x="985" y="155" width="70" height="2" fill="#ff6600" rx="1"/>
+  <!-- Tagline -->
+  <text
+    x="110"
+    y="498"
+    font-family="'Courier New', Courier, monospace"
+    font-size="16"
+    fill="#4a4a4a"
+    letter-spacing="3">Find the rhythm. Build the system.</text>
 
-  <!-- Bottom tag -->
-  <text x="100" y="530" font-family="'Courier New', Courier, monospace" font-size="12" fill="#2e2e2e" letter-spacing="4">THE CADENCE FRAMEWORK — SYSTEMS FOR GROWTH</text>
+  <!-- Right — URL -->
+  <text
+    x="1090"
+    y="555"
+    font-family="'Courier New', Courier, monospace"
+    font-size="11"
+    fill="#2a2a2a"
+    text-anchor="end"
+    letter-spacing="2">THECADENCEFRAMEWORK.COM</text>
 </svg>
