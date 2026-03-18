@@ -52,7 +52,7 @@
       --section-gap:   120px;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 
     body {
       background: var(--bg);
@@ -276,6 +276,12 @@
       padding: 130px 0 130px;
       text-align: center;
       overflow: hidden;
+    }
+
+    /* Hero content should be visible immediately — no reveal delay on load */
+    #hero .reveal {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Animated waveform behind hero */
