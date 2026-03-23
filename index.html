@@ -1120,6 +1120,50 @@
       .footer-copy { text-align: left; font-size: 0.72rem; }
     }
 
+    /* ── ACCESSIBILITY ── */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      z-index: 999;
+      background: var(--orange);
+      color: var(--bg);
+      padding: 0.75rem 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: var(--r);
+      text-decoration: none;
+      transition: top 0.15s ease;
+    }
+
+    .skip-link:focus {
+      top: 0.75rem;
+    }
+
+    /* Visible focus indicators for keyboard navigation */
+    *:focus-visible {
+      outline: 2px solid var(--orange);
+      outline-offset: 3px;
+    }
+
+    /* Remove default outline only when using mouse */
+    *:focus:not(:focus-visible) {
+      outline: none;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .hero-badge-dot { animation: none; }
       .hero-waveform .bar { animation: none; height: 40%; }
@@ -1130,6 +1174,9 @@
   </style>
 </head>
 <body>
+
+<!-- Skip to content link for keyboard/screen reader users -->
+<a href="#hero" class="skip-link">Skip to main content</a>
 
 <!-- Scroll progress -->
 <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
@@ -1148,7 +1195,7 @@
       <li><a href="#work">Work</a></li>
     </ul>
 
-    <a href="https://calendly.com/rosh903/cadencediscoverycall" target="_blank" rel="noopener noreferrer" class="btn-cta nav-cta-desktop">Book a Call &rarr;</a>
+    <a href="https://calendly.com/rosh903/cadencediscoverycall" target="_blank" rel="noopener noreferrer" class="btn-cta nav-cta-desktop">Book a Call &rarr;<span class="sr-only"> (opens in new tab)</span></a>
 
     <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1162,8 +1209,10 @@
   <a href="#sync" class="mobile-link">Process</a>
   <a href="#services" class="mobile-link">Services</a>
   <a href="#work" class="mobile-link">Work</a>
-  <a href="https://calendly.com/rosh903/cadencediscoverycall" target="_blank" rel="noopener noreferrer" class="btn-cta">Book a Call &rarr;</a>
+  <a href="https://calendly.com/rosh903/cadencediscoverycall" target="_blank" rel="noopener noreferrer" class="btn-cta">Book a Call &rarr;<span class="sr-only"> (opens in new tab)</span></a>
 </div>
+
+<main id="main-content">
 
 <!-- ── HERO ── -->
 <section id="hero" aria-label="Hero">
@@ -1447,6 +1496,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- ── FOOTER ── -->
 <footer>
