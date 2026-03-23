@@ -1087,6 +1087,107 @@
       text-align: right;
     }
 
+    /* ── LEAD CAPTURE ── */
+    .lead-capture {
+      padding: var(--section-gap) 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+      z-index: 1;
+    }
+
+    .lead-box {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .lead-box .h2 { margin-bottom: 0.75rem; }
+
+    .lead-sub {
+      color: var(--text-secondary);
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .lead-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .lead-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .lead-form input,
+    .lead-form textarea {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-mid);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      padding: 0.85rem 1rem;
+      border-radius: var(--r);
+      transition: border-color 0.15s;
+    }
+
+    .lead-form input::placeholder,
+    .lead-form textarea::placeholder {
+      color: var(--muted);
+    }
+
+    .lead-form input:focus,
+    .lead-form textarea:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+
+    .lead-form textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .lead-form button {
+      align-self: center;
+      margin-top: 0.5rem;
+    }
+
+    .lead-note {
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+
+    .lead-success {
+      display: none;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .lead-success.show { display: block; }
+
+    .lead-success-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .lead-success-text {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 560px) {
+      .lead-form-row { grid-template-columns: 1fr; }
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       :root { --section-gap: 80px; }
@@ -1493,6 +1594,40 @@
   </div>
 </section>
 
+<!-- ── LEAD CAPTURE ── -->
+<section class="lead-capture" id="connect" aria-label="Stay connected">
+  <div class="wrap">
+    <div class="lead-box">
+      <p class="label reveal">Stay in the loop</p>
+      <h2 class="h2 reveal reveal-delay-1">Not ready to talk yet?</h2>
+      <p class="lead-sub reveal reveal-delay-2">No problem. Drop your info and we'll send you insights on building better systems — no spam, just value.</p>
+
+      <form class="lead-form reveal reveal-delay-2" id="leadForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="53349a1a-e24c-47d3-90c9-ea2a0bdcb1bb" />
+        <input type="hidden" name="subject" value="New lead from thecadenceframework.com" />
+        <input type="hidden" name="from_name" value="Cadence Lead Capture" />
+        <div class="botcheck" style="display:none;"><input type="text" name="botcheck" /></div>
+        <div class="lead-form-row">
+          <input type="text" name="name" placeholder="Your name" required aria-label="Your name" />
+          <input type="email" name="email" placeholder="Email address" required aria-label="Email address" />
+        </div>
+        <input type="text" name="company" placeholder="Company name (optional)" aria-label="Company name" />
+        <button type="submit" class="btn-primary">
+          Send it
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </form>
+
+      <div class="lead-success" id="leadSuccess">
+        <p class="lead-success-title">You're in.</p>
+        <p class="lead-success-text">We'll be in touch — keep an eye on your inbox.</p>
+      </div>
+
+      <p class="lead-note reveal reveal-delay-3">No spam. Unsubscribe anytime. Your data stays private.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ── CTA ── -->
 <section id="cta" aria-label="Book a call">
   <div class="wrap">
@@ -1537,6 +1672,39 @@
 </footer>
 
 <script>
+  // ── Lead capture form: AJAX submit + Meta Lead event ──
+  const leadForm = document.getElementById('leadForm');
+  const leadSuccess = document.getElementById('leadSuccess');
+  if (leadForm) {
+    leadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = leadForm.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      try {
+        const res = await fetch(leadForm.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(leadForm)))
+        });
+        if (res.ok) {
+          leadForm.style.display = 'none';
+          leadSuccess.classList.add('show');
+          if (typeof fbq === 'function') fbq('track', 'Lead');
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Send it';
+          alert('Something went wrong. Please try again.');
+        }
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Send it';
+        alert('Connection error. Please try again.');
+      }
+    });
+  }
+
   // ── Meta Pixel: track Calendly CTA clicks as Schedule event ──
   document.querySelectorAll('a[href*="calendly.com"]').forEach(link => {
     link.addEventListener('click', () => {
