@@ -795,7 +795,7 @@
       font-weight: 700;
       color: var(--text);
       letter-spacing: -0.02em;
-      margin-bottom: 0.3rem;
+      margin: 0 0 0.3rem;
     }
 
     .phase-tag {
@@ -849,11 +849,24 @@
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      flex-direction: column;
+      gap: 0.5rem;
       transition: background 0.2s ease, box-shadow 0.2s ease;
       position: relative;
       overflow: hidden;
+    }
+
+    .service-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .service-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      opacity: 0.7;
     }
 
     .service::before {
@@ -889,6 +902,7 @@
       color: var(--text-secondary);
       letter-spacing: -0.01em;
       line-height: 1.4;
+      margin: 0;
       transition: color 0.2s ease;
     }
 
@@ -943,7 +957,7 @@
       text-transform: uppercase;
       color: var(--orange);
       padding-bottom: 1rem;
-      margin-bottom: 1.25rem;
+      margin: 0 0 1.25rem;
       border-bottom: 1px solid var(--border);
     }
 
@@ -1124,6 +1138,25 @@
     }
 
     .footer-links a:hover { color: var(--text); }
+
+    .footer-contact {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-contact a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-contact a:hover { color: var(--text); }
+
+    .footer-sep { color: var(--muted); }
 
     .footer-copy {
       font-family: var(--mono);
@@ -1457,6 +1490,9 @@
         <p class="reveal reveal-delay-4">
           The goal isn't to manage your company for you. It's to build systems so good that you can <strong>focus on leading it.</strong>
         </p>
+        <p class="reveal reveal-delay-4">
+          From churches and nonprofits to real estate firms and clothing brands — we've worked across industries because great operations consulting isn't about your niche. It's about building the right systems, automating what drains your time, and giving you a framework that actually scales with your business.
+        </p>
       </div>
       <div class="stats-panel reveal reveal-delay-2">
         <div class="stat">
@@ -1486,7 +1522,7 @@
     <div class="sync-top">
       <div>
         <p class="label reveal">The Cadence Sync</p>
-        <h2 class="h2 reveal reveal-delay-1">Every client.<br/>One process.</h2>
+        <h2 class="h2 reveal reveal-delay-1">Our Operations<br/>Consulting Process.</h2>
       </div>
       <p class="lead reveal reveal-delay-2">
         Regardless of your industry, every engagement moves through the same four phases — built to take you from stuck to scaling.
@@ -1495,25 +1531,25 @@
     <div class="phases-grid reveal reveal-delay-1">
       <div class="phase" data-num="01">
         <div class="phase-n">01</div>
-        <div class="phase-name">The Audit</div>
+        <h3 class="phase-name">The Audit</h3>
         <div class="phase-tag">Pulse Check</div>
         <p class="phase-body">We set up a call and map your current workflow — finding exactly where you're stuck in maintenance mode and what's slowing you down.</p>
       </div>
       <div class="phase" data-num="02">
         <div class="phase-n">02</div>
-        <div class="phase-name">The Blueprint</div>
+        <h3 class="phase-name">The Blueprint</h3>
         <div class="phase-tag">The Score</div>
         <p class="phase-body">We design your step-by-step process. A workflow map showing how your AI, web, and content systems connect — and what needs to change.</p>
       </div>
       <div class="phase" data-num="03">
         <div class="phase-n">03</div>
-        <div class="phase-name">The Integration</div>
+        <h3 class="phase-name">The Integration</h3>
         <div class="phase-tag">The Downbeat</div>
         <p class="phase-body">We build. Implementing the UI/UX, AI automations, and brand identity your company needs — based on your audit, not a preset package.</p>
       </div>
       <div class="phase" data-num="04">
         <div class="phase-n">04</div>
-        <div class="phase-name">The Momentum</div>
+        <h3 class="phase-name">The Momentum</h3>
         <div class="phase-tag">The Resonance</div>
         <p class="phase-body">Systems are live and running. Your company stops managing the machine — and starts leading it. Maintenance to movement.</p>
       </div>
@@ -1541,7 +1577,7 @@
     <div class="services-top">
       <div>
         <p class="label reveal">Our Services</p>
-        <h2 class="h2 reveal reveal-delay-1">What we build.</h2>
+        <h2 class="h2 reveal reveal-delay-1">Business Systems We Build.</h2>
       </div>
       <p class="services-note reveal reveal-delay-2">
         Every business is different. We deploy the services you need — from branding to automation — based on your audit. Not a package deal.
@@ -1549,48 +1585,81 @@
     </div>
     <div class="services-grid reveal reveal-delay-1">
       <div class="service">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-        <div class="service-name">Content Creation</div>
+        <div class="service-header">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <h3 class="service-name">Content Creation</h3>
+        </div>
+        <p class="service-desc">Blog posts, email sequences, landing page copy, and marketing content that speaks to your audience and drives action.</p>
       </div>
       <div class="service">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-        <div class="service-name">Consulting</div>
+        <div class="service-header">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <h3 class="service-name">Operations Consulting</h3>
+        </div>
+        <p class="service-desc">We audit your daily workflow step by step, find the gaps costing you time and money, and build a plan to fix them.</p>
       </div>
       <div class="service">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        <div class="service-name">Photography &amp; Videography</div>
+        <div class="service-header">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          <h3 class="service-name">Photography &amp; Videography</h3>
+        </div>
+        <p class="service-desc">Professional photo and video production for brands — product shoots, social content, promo videos, and event coverage.</p>
       </div>
       <div class="service">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <div class="service-name">Personal Branding</div>
+        <div class="service-header">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <h3 class="service-name">Personal Branding</h3>
+        </div>
+        <p class="service-desc">Position yourself as an authority in your space. We craft your story, visual identity, and online presence so people remember you.</p>
       </div>
       <div class="service">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        <div class="service-name">UI / UX Development</div>
+        <div class="service-header">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <h3 class="service-name">UI / UX Design</h3>
+        </div>
+        <p class="service-desc">User-centered interfaces that look sharp and convert. We design intuitive experiences for web and mobile apps.</p>
       </div>
       <div class="service">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        <div class="service-name">Branding &amp; Brand Identity</div>
+        <div class="service-header">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <h3 class="service-name">Branding &amp; Brand Identity</h3>
+        </div>
+        <p class="service-desc">Logos, color systems, typography, and brand guidelines that give your business a cohesive, professional look across every touchpoint.</p>
       </div>
       <div class="service">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        <div class="service-name">Social Media</div>
+        <div class="service-header">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          <h3 class="service-name">Social Media Management</h3>
+        </div>
+        <p class="service-desc">Strategy, scheduling, and content across platforms. We keep your brand active and engaging without you lifting a finger.</p>
       </div>
       <div class="service">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        <div class="service-name">Web Development</div>
+        <div class="service-header">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          <h3 class="service-name">Web Development</h3>
+        </div>
+        <p class="service-desc">Fast, responsive websites built to convert visitors into leads. From landing pages to full platforms — designed for performance and SEO.</p>
       </div>
       <div class="service">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-        <div class="service-name">App Development</div>
+        <div class="service-header">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          <h3 class="service-name">App Development</h3>
+        </div>
+        <p class="service-desc">Custom mobile and web applications tailored to your business needs — from internal tools to customer-facing products.</p>
       </div>
       <div class="service">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-        <div class="service-name">Digital Marketing</div>
+        <div class="service-header">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          <h3 class="service-name">Digital Marketing</h3>
+        </div>
+        <p class="service-desc">Paid ads, SEO, email campaigns, and funnel strategy that bring the right people to your business and turn clicks into clients.</p>
       </div>
       <div class="service">
-        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        <div class="service-name">AI Integration</div>
+        <div class="service-header">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <h3 class="service-name">AI Integration</h3>
+        </div>
+        <p class="service-desc">Automate repetitive tasks, streamline workflows, and build smarter systems using AI tools tailored to how your business actually operates.</p>
       </div>
     </div>
   </div>
@@ -1601,12 +1670,12 @@
   <div class="wrap">
     <div class="work-top">
       <p class="label reveal">Our Work</p>
-      <h2 class="h2 reveal reveal-delay-1">Who we've built for.</h2>
+      <h2 class="h2 reveal reveal-delay-1">Clients We've Built Systems For.</h2>
       <p class="lead reveal reveal-delay-2">Across industries. Different goals. One framework.</p>
     </div>
     <div class="work-grid reveal reveal-delay-1">
       <div class="work-cat">
-        <div class="cat-label">Companies</div>
+        <h3 class="cat-label">Companies</h3>
         <ul class="client-list">
           <li>Amoris Christ</li>
           <li>Jesus Youth</li>
@@ -1614,25 +1683,25 @@
         </ul>
       </div>
       <div class="work-cat">
-        <div class="cat-label">Video &amp; Photo</div>
+        <h3 class="cat-label">Video &amp; Photo</h3>
         <ul class="client-list">
           <li>FromNowOn</li>
         </ul>
       </div>
       <div class="work-cat">
-        <div class="cat-label">Clothing Brands</div>
+        <h3 class="cat-label">Clothing Brands</h3>
         <ul class="client-list">
           <li>Made for God</li>
         </ul>
       </div>
       <div class="work-cat">
-        <div class="cat-label">Real Estate</div>
+        <h3 class="cat-label">Real Estate</h3>
         <ul class="client-list">
           <li>ZPI</li>
         </ul>
       </div>
       <div class="work-cat">
-        <div class="cat-label">Catholic Churches</div>
+        <h3 class="cat-label">Catholic Churches</h3>
         <ul class="client-list">
           <li>AJS</li>
         </ul>
@@ -1714,6 +1783,13 @@
       <li><a href="#work">Work</a></li>
       <li><a href="#cta">Contact</a></li>
     </ul>
+    <div class="footer-contact">
+      <a href="mailto:cadenceframework@gmail.com">cadenceframework@gmail.com</a>
+      <span class="footer-sep" aria-hidden="true">&middot;</span>
+      <a href="tel:+12676259072">(267) 625-9072</a>
+      <span class="footer-sep" aria-hidden="true">&middot;</span>
+      <span>Elkins Park, PA</span>
+    </div>
     <p class="footer-copy">&copy; 2026 The Cadence Framework. All rights reserved.</p>
   </div>
 </footer>
