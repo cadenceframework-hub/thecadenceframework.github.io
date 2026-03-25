@@ -48,18 +48,62 @@
 
   <!-- Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "The Cadence Framework",
-    "url": "https://thecadenceframework.com",
-    "logo": "https://thecadenceframework.com/assets/logo.svg",
-    "description": "Business systems and operations consulting for startups and small businesses. We build branding, web development, AI integration, digital marketing, and automation systems so you can stop managing and start leading.",
-    "serviceType": ["Business Systems Consulting", "Operations Consulting", "Web Development", "Branding", "Digital Marketing", "AI Integration", "Business Process Automation", "App Development", "UI/UX Design", "Content Creation", "Social Media Marketing", "Email Marketing"],
-    "areaServed": "Worldwide",
-    "knowsAbout": ["business systems", "operations consulting", "startup consulting", "small business automation", "digital transformation", "brand strategy"],
-    "sameAs": []
-  }
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "@id": "https://thecadenceframework.com/#organization",
+      "name": "The Cadence Framework",
+      "alternateName": "Cadence Framework",
+      "url": "https://thecadenceframework.com/",
+      "logo": { "@type": "ImageObject", "url": "https://thecadenceframework.com/assets/logo.svg" },
+      "image": "https://thecadenceframework.com/assets/og-image.png",
+      "description": "Business systems and operations consulting for startups and small businesses. We build branding, web development, AI integration, digital marketing, and automation systems so you can stop managing and start leading.",
+      "telephone": "+1-267-625-9072",
+      "email": "cadenceframework@gmail.com",
+      "address": { "@type": "PostalAddress", "addressLocality": "Elkins Park", "addressRegion": "PA", "addressCountry": "US" },
+      "areaServed": { "@type": "Country", "name": "Worldwide" },
+      "contactPoint": { "@type": "ContactPoint", "telephone": "+1-267-625-9072", "contactType": "sales", "availableLanguage": "English" },
+      "priceRange": "$$",
+      "knowsAbout": ["business systems", "operations consulting", "startup consulting", "small business automation", "digital transformation", "brand strategy"],
+      "sameAs": ["https://www.facebook.com/thecadenceframeworkpage"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Business Systems & Operations Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Business Consulting", "description": "Operations and business systems consulting for startups and small businesses" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development", "description": "Custom website design, development, and optimization" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Integration", "description": "Artificial intelligence and automation integration for business processes" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Marketing", "description": "Digital marketing strategy, SEO, and paid advertising" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Branding & Brand Identity", "description": "Complete brand identity design and brand strategy" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "UI/UX Development", "description": "User interface and user experience design and development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "App Development", "description": "Mobile and web application development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Content Creation", "description": "Professional content creation and copywriting for businesses" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Social Media Marketing", "description": "Social media strategy, management, and growth" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Photography & Videography", "description": "Professional photography and videography for brands" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Personal Branding", "description": "Personal brand strategy and identity development" } }
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://thecadenceframework.com/#website",
+      "name": "The Cadence Framework",
+      "url": "https://thecadenceframework.com/",
+      "publisher": { "@id": "https://thecadenceframework.com/#organization" }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://thecadenceframework.com/",
+      "name": "The Cadence Framework — Business Systems & Operations Consulting for Small Business",
+      "description": "Stop managing. Start leading. The Cadence Framework builds business systems for startups and small businesses.",
+      "url": "https://thecadenceframework.com/",
+      "isPartOf": { "@id": "https://thecadenceframework.com/#website" },
+      "about": { "@id": "https://thecadenceframework.com/#organization" }
+    }
+  ]
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
