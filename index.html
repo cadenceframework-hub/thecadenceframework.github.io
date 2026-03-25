@@ -648,12 +648,12 @@
       align-items: center;
     }
 
-    .about-copy p + p { margin-top: 1.25rem; }
+    .about-copy p + p { margin-top: 0.75rem; }
 
     .about-copy p {
       font-size: 1.05rem;
       color: var(--text-secondary);
-      line-height: 1.85;
+      line-height: 1.65;
     }
 
     .about-copy p strong {
@@ -866,6 +866,14 @@
       font-size: 0.82rem;
       color: var(--text-secondary);
       line-height: 1.55;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+    }
+
+    .service:hover .service-desc {
+      max-height: 4rem;
       opacity: 0.7;
     }
 
@@ -1488,10 +1496,7 @@
           We audit your workflow <strong>step by step</strong> — your funnels, daily operations, and gaps. Then we design a framework that covers everything from branding and web development to AI integration and digital marketing.
         </p>
         <p class="reveal reveal-delay-4">
-          The goal isn't to manage your company for you. It's to build systems so good that you can <strong>focus on leading it.</strong>
-        </p>
-        <p class="reveal reveal-delay-4">
-          From churches and nonprofits to real estate firms and clothing brands — we've worked across industries because great operations consulting isn't about your niche. It's about building the right systems, automating what drains your time, and giving you a framework that actually scales with your business.
+          The goal isn't to manage your company for you. It's to build systems that automate what drains your time — so you can <strong>focus on leading it.</strong> From churches to real estate firms to clothing brands, great operations consulting isn't about your niche. It's about a framework that scales.
         </p>
       </div>
       <div class="stats-panel reveal reveal-delay-2">
